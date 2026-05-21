@@ -35,3 +35,8 @@ Proyek Internet of Things (IoT) sederhana untuk menyiram tanaman secara otomatis
 2. *Upload* program (file `.ino`) ke dalam mikrokontroler menggunakan Arduino IDE.
 3. Buka **Serial Monitor** dan atur *baud rate* pada **9600** untuk memantau data kelembapan secara *real-time*.
 4. Tancapkan sensor ke tanah. Sistem akan langsung bekerja menyiram secara otomatis berdasarkan batas kelembapan yang sudah diatur.
+
+## 💸 Harga Jual Beli
+Kapasitas Kecil (0.5 - 1.5 Liter): Rp10.000 - Rp30.000
+Kapasitas Sedang (2 - 3 Liter): Rp35.000 - Rp70.000
+Kapasitas Besar (5 - 10 Liter): Rp80.000 - Rp400.000 (tergantung bahan plastik tebal atau seng) 
