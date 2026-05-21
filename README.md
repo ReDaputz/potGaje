@@ -1,2 +1,3 @@
 # potGaje
-Ini Git Script untuk automasi siram air dan deteksi kelembapan
+Ini Git Script untuk automasi siram air dan deteksi kelembapan 
+ok dap
