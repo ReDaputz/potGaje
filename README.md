@@ -1,43 +1,37 @@
 # 🌱 Pot Siram Otomatis (Smart Watering Pot)
 
-Proyek Internet of Things (IoT) untuk menyiram tanaman secara otomatis berdasarkan tingkat kelembapan tanah. Sistem ini membaca kondisi tanah secara *real-time* dan menyalakan pompa air hanya ketika tanah benar-benar kering.
+Proyek Internet of Things (IoT) sederhana untuk menyiram tanaman secara otomatis. Sistem membaca kondisi tanah menggunakan sensor kelembapan kapasitif dan menyalakan pompa air via modul relay ketika tanah terdeteksi kering.
 
-## 🚀 Fitur Utama
-* **Penyiraman Otomatis:** Pompa menyala otomatis saat tanah kering.
-* **Monitoring Kelembapan:** Membaca persentase kelembapan tanah secara *real-time*.
-* **Hemat Energi & Air:** Mencegah *overwatering* (penyiraman berlebih).
+## 🚀 Fitur & Logika Sistem
+* **Pembacaan Sensor (Pin A0):** Menggunakan sensor kapasitif yang lebih awet. Karakteristik sensor ini: nilai analog akan naik saat tanah kering, dan turun saat tanah basah.
+* **Ambang Batas / Threshold (600):** Sistem diatur dengan nilai referensi 600. Jika sensor membaca nilai di atas 600, tanah dianggap kering.
+* **Kontrol Relay Active-LOW (Pin 12):** 
+  * Saat tanah kering (> 600): Mikrokontroler mengirim sinyal `LOW` ke pin 12 untuk **menyalakan** pompa.
+  * Saat tanah basah (<= 600): Mikrokontroler mengirim sinyal `HIGH` ke pin 12 untuk **mematikan** pompa.
+* **Interval Pemantauan:** Sistem membaca ulang kelembapan setiap 2 detik (2000 ms) agar kerja mikrokontroler lebih stabil.
 
 ## 🛠️ Komponen yang Dibutuhkan
-1. Mikrokontroler (Arduino Uno / NodeMCU ESP8266 / ESP32)
-2. Soil Moisture Sensor (Sensor Kelembapan Tanah)
-3. Modul Relay 1-Channel (5V)
-4. Pompa Air Mini (Submersible Pump) 3-5V
-5. Selang Air Kecil
-6. Kabel Jumper (Male-to-Female / Male-to-Male)
-7. Adaptor Daya / Baterai
+1. Mikrokontroler (Arduino Uno / Nano)
+2. Capacitive Soil Moisture Sensor (Sensor Kelembapan Tanah Kapasitif)
+3. Modul Relay 1-Channel 5V (Tipe *Active-LOW*)
+4. Pompa Air Mini (Submersible Pump) 3-5V & Selang
+5. Kabel Jumper & Adaptor Daya/Baterai
 
 ## 🔌 Skema Rangkaian (Wiring)
 
 | Komponen | Pin Mikrokontroler | Keterangan |
 | :--- | :--- | :--- |
-| **Soil Moisture VCC** | 3.3V / 5V | Sesuai spesifikasi sensor |
-| **Soil Moisture GND**| GND | Ground |
-| **Soil Moisture A0** | A0 | Pin Analog |
-| **Relay VCC** | 5V | Daya relay |
+| **Sensor VCC** | 5V / 3.3V | Daya Sensor |
+| **Sensor GND** | GND | Ground |
+| **Sensor AOUT**| `A0` | Pin Analog (Input data kelembapan) |
+| **Relay VCC** | 5V | Daya Relay |
 | **Relay GND** | GND | Ground |
-| **Relay IN** | D1 / Pin 5 | Pin Digital Out |
+| **Relay IN** | `12` | Pin Digital Out (Kontrol on/off pompa) |
 
-*Catatan: Pompa air dihubungkan ke sumber daya eksternal melalui terminal NO (Normally Open) dan COM pada modul Relay.*
+> **Catatan Pompa:** Hubungkan kabel positif (+) dari pompa ke terminal **NO (Normally Open)** pada relay, dan sumber daya positif eksternal ke terminal **COM** relay. 
 
-## ⚙️ Cara Instalasi
-1. Rangkai komponen sesuai dengan skema *wiring* di atas.
-2. Hubungkan mikrokontroler ke komputer menggunakan kabel USB.
-3. Buka Arduino IDE.
-4. *Upload* kode program (`main.ino`) ke mikrokontroler.
-5. Tancapkan sensor kelembapan ke dalam tanah pot.
-6. Masukkan pompa ke dalam wadah penampungan air.
-
-## 💻 Penggunaan
-Setelah sistem dinyalakan, buka **Serial Monitor** di Arduino IDE (baud rate: 9600) untuk melihat nilai kelembapan. 
-* Jika nilai di bawah ambang batas (misal: `< 40%`), relay akan aktif dan pompa menyala.
-* Jika nilai sudah ideal, pompa akan mati otomatis.
+## 💻 Cara Penggunaan
+1. Rangkai seluruh komponen sesuai dengan tabel *wiring* di atas.
+2. *Upload* program (file `.ino`) ke dalam mikrokontroler menggunakan Arduino IDE.
+3. Buka **Serial Monitor** dan atur *baud rate* pada **9600** untuk memantau data kelembapan secara *real-time*.
+4. Tancapkan sensor ke tanah. Sistem akan langsung bekerja menyiram secara otomatis berdasarkan batas kelembapan yang sudah diatur.
