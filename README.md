@@ -32,7 +32,7 @@ Proyek Internet of Things (IoT) sederhana untuk menyiram tanaman secara otomatis
 
 ## 💻 Cara Penggunaan
 1. Rangkai seluruh komponen sesuai dengan tabel *wiring* di atas.
-2. *Upload* program (file `.ino`) ke dalam mikrokontroler menggunakan Arduino IDE.
+2. *Upload* program [(file `.ino`)](siramOtomatis.cpp) ke dalam mikrokontroler menggunakan Arduino IDE.
 3. Buka **Serial Monitor** dan atur *baud rate* pada **9600** untuk memantau data kelembapan secara *real-time*.
 4. Tancapkan sensor ke tanah. Sistem akan langsung bekerja menyiram secara otomatis berdasarkan batas kelembapan yang sudah diatur.
 
